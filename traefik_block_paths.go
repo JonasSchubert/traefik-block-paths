@@ -85,7 +85,7 @@ func (blockPaths *traefik_block_paths) ServeHTTP(responseWriter http.ResponseWri
 				log.Println(err)
 			}
 		
-			log.Printf("%s: Request (%s %s) denied for IPs [%s]", blockPaths.name, request.Host, request.URL, ipAddresses)
+			log.Printf("%s: Request (%s %s) denied for IPs %s", blockPaths.name, request.Host, request.URL, ipAddresses)
 
 			responseWriter.WriteHeader(blockPaths.statusCode)
 			return
