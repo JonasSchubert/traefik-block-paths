@@ -75,18 +75,16 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 
 // This method is the middleware called during runtime and handling middleware actions.
 func (blockPaths *traefik_block_paths) ServeHTTP(responseWriter http.ResponseWriter, request *http.Request) {
-	ipAddresses, err := blockPaths.CollectRemoteIP(request)
-	if err != nil {
-		// If one of the ip addresses could not be parsed, return status forbidden.
-		log.Println(err)
-		responseWriter.WriteHeader(http.StatusForbidden)
-		return
-	}
-
 	currentPath := request.URL.EscapedPath()
 
 	for _, regex := range blockPaths.regexps {
 		if regex.MatchString(currentPath) {
+			ipAddresses, err := blockPaths.CollectRemoteIP(request)
+			if err != nil {
+				log.Println("Failed to collect remote ip...")
+				log.Println(err)
+			}
+		
 			log.Printf("%s: Request (%s %s) denied for IPs [%s]", blockPaths.name, request.Host, request.URL, ipAddresses)
 
 			responseWriter.WriteHeader(blockPaths.statusCode)
