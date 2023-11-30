@@ -1,3 +1,3 @@
 module github.com/JonasSchubert/traefik-block-paths
 
-go 1.21.4
+go 1.21.3
