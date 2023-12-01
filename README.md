@@ -27,6 +27,7 @@ http:
     block-wp:
       plugin:
         block-paths:
+          allowLocalRequests: true
           regex:
             - "^/wp(.*)"
           statusCode: 404
@@ -58,6 +59,7 @@ services:
 
 ## Sample configuration
 
+- `allowLocalRequests`: If set to true, will not block request from [Private IP Ranges](https://de.wikipedia.org/wiki/Private_IP-Adresse)
 - `regex`:  List of regex values to use for path blocking.
 - `statusCode`: Return value of the status code.
 
@@ -65,6 +67,7 @@ services:
 my-block-paths:
   plugin:
     block-paths:
+      allowLocalRequests: true
       regex:
         - "^/wp(.*)"
       statusCode: 404
