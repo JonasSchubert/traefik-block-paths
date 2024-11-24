@@ -20,7 +20,7 @@ type traefik_block_paths struct {
 	name               string
 	allowLocalRequests bool
 	privateIPRanges    []*net.IPNet
-	regexps 		   []*regexp.Regexp
+	regexps            []*regexp.Regexp
 	silentStartUp      bool
 	statusCode         int
 }
@@ -41,7 +41,7 @@ func CreateConfig() *Config {
 	return &Config{
 		AllowLocalRequests: true,
 		SilentStartUp:      true,
-		StatusCode:		    403, // https://cs.opensource.google/go/go/+/refs/tags/go1.21.4:src/net/http/status.go
+		StatusCode:         403, // https://cs.opensource.google/go/go/+/refs/tags/go1.21.4:src/net/http/status.go
 	}
 }
 
@@ -93,7 +93,7 @@ func (blockPaths *traefik_block_paths) ServeHTTP(responseWriter http.ResponseWri
 
 			if !blockPaths.allowLocalRequests {
 				log.Printf("%s: Request (%s %s) denied for IPs %s", blockPaths.name, request.Host, request.URL, ipAddresses)
-	
+
 				responseWriter.WriteHeader(blockPaths.statusCode)
 				return
 			}
@@ -109,7 +109,7 @@ func (blockPaths *traefik_block_paths) ServeHTTP(responseWriter http.ResponseWri
 
 			if !isPrivateIp {
 				log.Printf("%s: Request (%s %s) denied for IPs %s", blockPaths.name, request.Host, request.URL, ipAddresses)
-	
+
 				responseWriter.WriteHeader(blockPaths.statusCode)
 				return
 			}
