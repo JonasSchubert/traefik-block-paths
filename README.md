@@ -36,7 +36,6 @@ http:
 docker-compose.yml
 
 ```yaml
-version: "3.7"
 services:
   traefik:
     image: traefik
