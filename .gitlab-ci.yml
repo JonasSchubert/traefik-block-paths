@@ -1,7 +1,0 @@
-variables:
-  RELEASE_DISABLED: "true"
-
-include:
-  - project: "dx/ci"
-    ref: main
-    file: "/templates/go.yml"
